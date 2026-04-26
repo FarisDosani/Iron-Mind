@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BMI Calculator - Iron Mind</title>
+    <!-- Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <style>
+      /* Reset and Basic Styling */
+      body {
+        margin: 0;
+        font-family: "Roboto", sans-serif;
+        background-color: #f9f4ef;
+        color: #4a3f36;
+      }
+
+      /* Navigation Bar */
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #5b3c2b;
+        padding: 15px 30px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      nav .logo-container {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+      }
+
+      nav .logo-container img {
+        height: 40px;
+        margin-right: 10px;
+      }
+
+      nav .logo-container .logo-text {
+        color: #d19a66;
+        font-family: "Poppins", sans-serif;
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
+
+      nav ul {
+        display: flex;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      nav ul li {
+        margin: 0 15px;
+      }
+
+      nav ul li a {
+        color: #f3e0ce;
+        text-decoration: none;
+        font-size: 1.1rem;
+        font-family: "Poppins", sans-serif;
+        transition: color 0.3s;
+      }
+
+      nav ul li a:hover {
+        color: #d19a66;
+      }
+
+      /* BMI Calculator Section */
+      .bmi-calculator {
+        padding: 60px;
+        max-width: 800px;
+        margin: 60px auto;
+        background-color: #fffaf5;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+
+      .bmi-calculator h2 {
+        font-family: "Poppins", sans-serif;
+        font-size: 2.5rem;
+        color: #5b3c2b;
+        margin-bottom: 20px;
+      }
+
+      .bmi-calculator label {
+        display: block;
+        margin: 20px 0 10px;
+        font-weight: bold;
+        color: #4a3f36;
+      }
+
+      .bmi-calculator input {
+        width: 100%;
+        padding: 10px;
+        font-size: 1rem;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-sizing: border-box;
+      }
+
+      .bmi-calculator button {
+        background-color: #d19a66;
+        color: #fff;
+        border: none;
+        padding: 15px 30px;
+        border-radius: 5px;
+        font-size: 1.2rem;
+        font-family: "Poppins", sans-serif;
+        margin-top: 20px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .bmi-calculator button:hover {
+        background-color: #b58054;
+      }
+
+      .bmi-calculator .result {
+        margin-top: 20px;
+        font-size: 1.5rem;
+        font-family: "Roboto", sans-serif;
+        color: #4a3f36;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <nav>
+      <a href="#" class="logo-container">
+        <img src="logo.png" alt="Iron Mind Logo" />
+        <span class="logo-text">Iron Mind</span>
+      </a>
+      <ul>
+        <li><a href="homepage.html">Home</a></li>
+        <li><a href="shoulders.html">Shoulders</a></li>
+        <li><a href="arms.html">Arms</a></li>
+        <li><a href="legs.html">Legs</a></li>
+        <li><a href="chest.html">Chest</a></li>
+        <li><a href="abs.html">Abs</a></li>
+      </ul>
+    </nav>
+
+    <!-- BMI Calculator Section -->
+    <section class="bmi-calculator">
+      <h2>BMI Calculator</h2>
+      <form id="bmi-form">
+        <label for="weight">Weight (kg)</label>
+        <input type="number" id="weight" name="weight" placeholder="Enter your weight" required />
+
+        <label for="height">Height (cm)</label>
+        <input type="number" id="height" name="height" placeholder="Enter your height" required />
+
+        <button type="button" onclick="calculateBMI()">Calculate BMI</button>
+      </form>
+      <div class="result" id="bmi-result"></div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <p>&copy; 2024 Iron Mind. All rights reserved.</p>
+    </footer>
+
+    <script>
+      function calculateBMI() {
+        const weight = parseFloat(document.getElementById("weight").value);
+        const height = parseFloat(document.getElementById("height").value) / 100; // Convert cm to meters
+
+        if (isNaN(weight) || isNaN(height) || height <= 0 || weight <= 0) {
+          document.getElementById("bmi-result").textContent =
+            "Please enter valid values for weight and height.";
+          return;
+        }
+
+        const bmi = (weight / (height * height)).toFixed(2);
+
+        let category = "";
+        if (bmi < 18.5) {
+          category = "Underweight";
+        } else if (bmi < 24.9) {
+          category = "Normal weight";
+        } else if (bmi < 29.9) {
+          category = "Overweight";
+        } else {
+          category = "Obese";
+        }
+
+        document.getElementById("bmi-result").textContent =
+          `Your BMI is ${bmi} (${category}).`;
+      }
+    </script>
+  </body>
+</html>
